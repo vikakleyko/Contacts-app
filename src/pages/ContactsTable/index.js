@@ -11,6 +11,8 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
+import { CopyToClipBoardText } from "../../components/CopyToClipBoardText";
+import { NATIONALITIES_HUMAN_NAME } from "../../constants/nationality";
 
 const useStyles = makeStyles({
   table: {},
@@ -50,10 +52,20 @@ export const ContactsTable = ({ data }) => {
 
                 <Typography>{contact.dob.age} years</Typography>
               </TableCell>
-              <TableCell>{contact.phone}</TableCell>
-              <TableCell>{contact.email}</TableCell>
-              <TableCell>{contact.phone}</TableCell>
-              <TableCell>{contact.phone}</TableCell>
+              <TableCell>
+                <CopyToClipBoardText text={contact.phone} />
+              </TableCell>
+              <TableCell>
+                <CopyToClipBoardText text={contact.email} />
+              </TableCell>
+              <TableCell>
+                <Typography>{contact.location.country}</Typography>
+                <Typography>
+                  {contact.location.city}, {contact.location.street.name}{" "}
+                  {contact.location.street.number}
+                </Typography>
+              </TableCell>
+              <TableCell>{NATIONALITIES_HUMAN_NAME[contact.nat]}</TableCell>
             </TableRow>
           ))}
         </TableBody>
